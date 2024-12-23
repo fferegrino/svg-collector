@@ -5,6 +5,7 @@ on:
 
 jobs:
   check-style:
+    name: Check style
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
