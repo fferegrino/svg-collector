@@ -26,6 +26,7 @@ jobs:
         black --line-length 120 --check svg_collector/main.py
 
   publish:
+    if: startsWith(github.ref, 'refs/tags/')
     name: Publish
     needs: check-style
     runs-on: ubuntu-latest
