@@ -15,7 +15,7 @@ files.mkdir(parents=True, exist_ok=True)
 def run():
     user_input = input("Enter the URL: ")
 
-    desired_sizes = [500, 1000, 2000]
+    desired_sizes = [100, 500, 1000, 2000]
 
     while user_input != "q":
         url, *arguments = user_input.split(" ")
