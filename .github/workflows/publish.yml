@@ -1,0 +1,10 @@
+name: Publish
+
+on:
+  push:
+
+jobs:
+  check-style:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "Hola mundo!"
