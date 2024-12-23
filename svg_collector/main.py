@@ -2,6 +2,8 @@
 import urllib.parse
 from pathlib import Path
 
+import cairosvg
+import requests
 import typer
 
 app = typer.Typer()
@@ -10,8 +12,6 @@ files = Path("downloads")
 files.mkdir(parents=True, exist_ok=True)
 
 
-import cairosvg
-import requests
 
 @app.command()
 def run():

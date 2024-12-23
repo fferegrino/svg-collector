@@ -16,7 +16,9 @@ jobs:
         pip install poetry
         poetry config virtualenvs.create false --local
         poetry install
-    - name: Check style
+    - name: Check imports
       run: |
         isort --profile black --float-to-top --check-only svg_collector/main.py
+    - name: Check formatting
+      run: |
         black --line-length 120 --check svg_collector/main.py
