@@ -7,4 +7,15 @@ jobs:
   check-style:
     runs-on: ubuntu-latest
     steps:
-    - run: echo "Hola mundo!"
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - name: Install dependencies
+      run: |
+        pip install poetry
+        poetry install
+    - name: Check style
+      run: |
+        isort --profile black --float-to-top main.py
+        black --line-length 120 main.py
