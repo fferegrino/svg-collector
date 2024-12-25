@@ -5,6 +5,8 @@ import cairosvg
 import requests
 import typer
 
+from svg_collector.view_box import get_view_box
+
 app = typer.Typer()
 
 files = Path("downloads")
@@ -26,7 +28,11 @@ def run():
         with open(files / path.name, "wb") as f:
             f.write(response.content)
 
-        argument_to_modify = "output_width"
+        view_box = get_view_box(response.content)
+
+        argument_to_modify = "output_width" if view_box.width > view_box.height else "output_height"
+        file_suffix = ""
+
         if arguments:
             desired_sizes = [int(arguments[0])]
 
@@ -35,11 +41,17 @@ def run():
 
                 if specification == "-h":
                     argument_to_modify = "output_height"
+                    file_suffix = "h"
+                elif specification == "-w":
+                    argument_to_modify = "output_width"
+                    file_suffix = "w"
 
         for size in desired_sizes:
 
             cairosvg.svg2png(
-                bytestring=response.content, write_to=f"{files / path.name}_{size}.png", **{argument_to_modify: size}
+                bytestring=response.content,
+                write_to=f"{files / path.name}_{size}{file_suffix}.png",
+                **{argument_to_modify: size},
             )
 
         user_input = input("Enter the URL: ")
